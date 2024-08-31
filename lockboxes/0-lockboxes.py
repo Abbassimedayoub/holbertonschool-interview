@@ -5,8 +5,10 @@
 def canUnlockAll(boxes):
     """
     Return if all boxex can be unlocked
-    :parm boxes : list of list wehere each list represent the compoment of a box
-    :return: True if all boxes can be opened and false otherwise
+    :parm boxes : list of list wehere each list 
+    represent the compoment of a box
+    :return: True if all boxes can be opened
+    and false otherwise
     """
     n = len(boxes)
     unloked = [False] * n  # initialise that all boxes are loked
