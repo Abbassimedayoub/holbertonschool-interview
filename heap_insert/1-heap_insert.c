@@ -49,15 +49,9 @@ heap_t *find_insertion_point(heap_t *root)
 	int head = 0, tail = 0, size = 1024;
 	heap_t *current;
 
-	if (!root)
-		return (NULL);
 
 	queue = malloc(sizeof(heap_t *) * size);
-	if (!queue)
-		return (NULL);
-
 	queue[tail++] = root;
-
 	while (head < tail)
 	{
 		current = queue[head++];
@@ -66,7 +60,6 @@ heap_t *find_insertion_point(heap_t *root)
 			free(queue);
 			return (current);
 		}
-
 		if (current->left)
 		{
 			if (tail >= size)
@@ -90,7 +83,6 @@ heap_t *find_insertion_point(heap_t *root)
 			queue[tail++] = current->right;
 		}
 	}
-
 	free(queue);
 	return (NULL);
 }
@@ -113,19 +105,15 @@ heap_t *heap_insert(heap_t **root, int value)
 		*root = binary_tree_node(NULL, value);
 		return (*root);
 	}
-
 	insert_point = find_insertion_point(*root);
 	if (!insert_point)
 		return (NULL);
-
 	new_node = binary_tree_node(insert_point, value);
 	if (!new_node)
 		return (NULL);
-
 	if (!insert_point->left)
 		insert_point->left = new_node;
 	else
 		insert_point->right = new_node;
-
 	return (heapify_up(new_node));
 }
