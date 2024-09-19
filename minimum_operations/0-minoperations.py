@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""function that soolve the min operation problem """
+
+
 def minOperations(n):
     """
     Return the min number of operation
