@@ -1,5 +1,11 @@
 #!/usr/bin/python3
 def minOperations(n):
+    """
+    Return the min number of operation
+    :parm n : the number
+    :return: the min number of operation
+    and 0 if n impossible
+    """
     if n <= 1:
         return 0
     num_operation = 0
