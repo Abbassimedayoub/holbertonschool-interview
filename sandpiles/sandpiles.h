@@ -3,9 +3,11 @@
 
 #define SIZE 3
 
-void sandpiles_sum(int grid1[SIZE][SIZE], int grid2[SIZE][SIZE]);
-void print_grid(int grid[3][3]);
-int is_stable(int grid[SIZE][SIZE]);
-void topple(int grid[SIZE][SIZE]);
 
-#endif // SANDPILES__H
+void print_sandpile(int grid[3][3]);
+int check_is_stable(int grid1[3][3], int grid2[3][3]);
+void sum_grids(int grid1[3][3], int grid2[3][3]);
+void toppling_round(int grid1[3][3], int grid2[3][3]);
+void sandpiles_sum(int grid1[3][3], int grid2[3][3]);
+
+#endif

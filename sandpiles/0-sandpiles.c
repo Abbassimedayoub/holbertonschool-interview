@@ -2,18 +2,18 @@
 #include <stdio.h>
 #include "sandpiles.h"
 
-void print_grid(int grid[SIZE][SIZE]) {
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
+void print_grid(int grid[3][3]) {
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
             printf("%d ", grid[i][j]);
         }
         printf("\n");
     }
 }
 
-int is_stable(int grid[SIZE][SIZE]) {
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
+int is_stable(int grid[3][3]) {
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
             if (grid[i][j] > 3)
                 return 0; // Unstable
         }
@@ -21,12 +21,12 @@ int is_stable(int grid[SIZE][SIZE]) {
     return 1; // Stable
 }
 
-void topple(int grid[SIZE][SIZE]) {
+void topple(int grid[3][3]) {
     int stable = 0;
     while (!stable) {
         stable = 1;
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
                 if (grid[i][j] > 3) {
                     stable = 0;
                     int excess = grid[i][j] - 4;
@@ -34,19 +34,19 @@ void topple(int grid[SIZE][SIZE]) {
                     
                     // Distribute the excess to the neighbors
                     if (i > 0) grid[i - 1][j] += excess / 4; // Top
-                    if (i < SIZE - 1) grid[i + 1][j] += excess / 4; // Bottom
+                    if (i < 3 - 1) grid[i + 1][j] += excess / 4; // Bottom
                     if (j > 0) grid[i][j - 1] += excess / 4; // Left
-                    if (j < SIZE - 1) grid[i][j + 1] += excess / 4; // Right
+                    if (j < 3 - 1) grid[i][j + 1] += excess / 4; // Right
                 }
             }
         }
     }
 }
 
-void sandpiles_sum(int grid1[SIZE][SIZE], int grid2[SIZE][SIZE]) {
+void sandpiles_sum(int grid1[3][3], int grid2[3][3]) {
     // Add the two sandpiles
-    for (int i = 0; i < SIZE; i++) {
-        for (int j = 0; j < SIZE; j++) {
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
             grid1[i][j] += grid2[i][j];
         }
     }
