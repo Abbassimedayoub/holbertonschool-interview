@@ -1,60 +1,127 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include "sandpiles.h"
+#include <stdio.h>
 
-void print_grid(int grid[3][3]) {
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
-            printf("%d ", grid[i][j]);
-        }
-        printf("\n");
-    }
+/**
+ * print_sandpile - prints input grid (or sandpile)
+ * @grid: sandpile.
+ * Return: no return.
+ */
+
+void print_sandpile(int grid[3][3])
+{
+	int i;
+	int j;
+
+	printf("=\n");
+
+	for (i = 0; i < 3; i++)
+	{
+		for (j = 0; j < 3; j++)
+		{
+			if (j)
+				printf(" ");
+			printf("%d", grid[i][j]);
+		}
+		printf("\n");
+	}
 }
 
-int is_stable(int grid[3][3]) {
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
-            if (grid[i][j] > 3)
-                return 0; // Unstable
-        }
-    }
-    return 1; // Stable
+/**
+ * check_is_stable - function that checks if grid1
+ * is stable and copies values to grid2
+ * @grid1: first sandpile.
+ * @grid2: second sandpile.
+ * Return: 1 if grid1 is stable. Otherwise, 0.
+ */
+
+int check_is_stable(int grid1[3][3], int grid2[3][3])
+{
+	int i;
+	int j;
+	int stable;
+
+	stable = 1;
+
+	for (i = 0; i < 3; i++)
+	{
+		for (j = 0; j < 3; j++)
+		{
+			grid2[i][j] = grid1[i][j];
+			if (grid1[i][j] > 3)
+				stable = 0;
+		}
+	}
+	return (stable);
 }
 
-void topple(int grid[3][3]) {
-    int stable = 0;
-    while (!stable) {
-        stable = 1;
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if (grid[i][j] > 3) {
-                    stable = 0;
-                    int excess = grid[i][j] - 4;
-                    grid[i][j] = 4; // Set to 4
-                    
-                    // Distribute the excess to the neighbors
-                    if (i > 0) grid[i - 1][j] += excess / 4; // Top
-                    if (i < 3 - 1) grid[i + 1][j] += excess / 4; // Bottom
-                    if (j > 0) grid[i][j - 1] += excess / 4; // Left
-                    if (j < 3 - 1) grid[i][j + 1] += excess / 4; // Right
-                }
-            }
-        }
-    }
+/**
+ * sum_grids - function that sums two grids or sandpiles
+ * @grid1: first sandpile.
+ * @grid2: second sandpile.
+ * Return: no return.
+ */
+
+void sum_grids(int grid1[3][3], int grid2[3][3])
+{
+	int i;
+	int j;
+
+	for (i = 0; i < 3; i++)
+	{
+		for (j = 0; j < 3; j++)
+		{
+			grid1[i][j] += grid2[i][j];
+		}
+	}
 }
 
-void sandpiles_sum(int grid1[3][3], int grid2[3][3]) {
-    // Add the two sandpiles
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
-            grid1[i][j] += grid2[i][j];
-        }
-    }
-    
-    // Check for stability and handle topplings
-    while (!is_stable(grid1)) {
-        printf("Grid 1 before toppling:\n");
-        print_grid(grid1);
-        topple(grid1);
-    }
+/**
+ * toppling_round - function that iterates over sandpiles
+ * @grid1: first sandpile.
+ * @grid2: second sandpile.
+ * Return: no return.
+ */
+
+void toppling_round(int grid1[3][3], int grid2[3][3])
+{
+	int i;
+	int j;
+
+	for (i = 0; i < 3; i++)
+	{
+		for (j = 0; j < 3; j++)
+		{
+			if (grid2[i][j] > 3)
+			{
+				if (i > 0)
+					grid1[i - 1][j] += 1;
+				if (j < (3 - 1))
+					grid1[i][j + 1] += 1;
+				if (i < (3 - 1))
+					grid1[i + 1][j] += 1;
+				if (j > 0)
+					grid1[i][j - 1] += 1;
+				grid1[i][j] -= 4;
+			}
+		}
+	}
+}
+
+/**
+ * sandpiles_sum - function that computes the sum of
+ * two sandpiles.
+ * @grid1: first sandpile.
+ * @grid2: second sandpile.
+ * Return: no return.
+ */
+
+void sandpiles_sum(int grid1[3][3], int grid2[3][3])
+{
+	sum_grids(grid1, grid2);
+
+	while (!check_is_stable(grid1, grid2))
+	{
+		print_sandpile(grid1);
+		toppling_round(grid1, grid2);
+	}
 }
