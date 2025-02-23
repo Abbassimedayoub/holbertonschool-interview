@@ -1,48 +1,44 @@
 #!/usr/bin/python3
+"""
+Task - Script that reads stdin line by line and computes metrics
+"""
 
-'''
-Reads stdin line by line and computes metrics
-'''
 import sys
 
-if __name__ == "__main__":
 
-    status_codes = {200: 0, 301: 0, 400: 0, 401: 0,
-                    403: 0, 404: 0, 405: 0, 500: 0}
-    file_size = [0]
+if __name__ == "__main__":
+    st_code = {"200": 0,
+               "301": 0,
+               "400": 0,
+               "401": 0,
+               "403": 0,
+               "404": 0,
+               "405": 0,
+               "500": 0}
     count = 1
+    file_size = 0
+
+    def parse_line(line):
+        """ Read, parse and grab data"""
+        try:
+            parsed_line = line.split()
+            status_code = parsed_line[-2]
+            if status_code in st_code.keys():
+                st_code[status_code] += 1
+            return int(parsed_line[-1])
+        except Exception:
+            return 0
 
     def print_stats():
-        '''
-        Prints file size and stats for every 10 loops
-        '''
-        print('File size: {}'.format(file_size[0]))
-
-        for code in sorted(status_codes.keys()):
-            if status_codes[code] != 0:
-                print('{}: {}'.format(code, status_codes[code]))
-
-    def parse_stdin(line):
-        '''
-        Checks the stdin for matches
-        '''
-        try:
-            line = line[:-1]
-            word = line.split(' ')
-
-            file_size[0] += int(word[-1])
-
-            status_code = int(word[-2])
-
-            if status_code in status_codes:
-                status_codes[status_code] += 1
-        except BaseException:
-            pass
+        """print stats in ascending order"""
+        print("File size: {}".format(file_size))
+        for key in sorted(st_code.keys()):
+            if st_code[key]:
+                print("{}: {}".format(key, st_code[key]))
 
     try:
         for line in sys.stdin:
-            parse_stdin(line)
-
+            file_size += parse_line(line)
             if count % 10 == 0:
                 print_stats()
             count += 1
