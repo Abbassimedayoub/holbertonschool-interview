@@ -1,13 +1,13 @@
 #include "search_algos.h"
 
 /**
-* find_index - finds the index of the 1st occurrence of a value in an array
-*@an_array:    (int*)  sorted array of integers
-*@start:       (int)   index indicating the start of the sub-array
-*@end:         (int)   index indicating the end of the sub-array
-*@val:         (int)   value to be finded
-*Return:		pos:	(int)   index where value is located or -1 otherwise
-*/
+ * find_index - finds the index of the 1st occurrence of a value in an array
+ *@an_array:    (int*)  sorted array of integers
+ *@start:       (int)   index indicating the start of the sub-array
+ *@end:         (int)   index indicating the end of the sub-array
+ *@val:         (int)   value to be finded
+ *Return:		pos:	(int)   index where value is located or -1 otherwise
+ */
 
 int find_index(int *an_array, size_t start, size_t end, int val)
 {
@@ -54,7 +54,7 @@ int find_index(int *an_array, size_t start, size_t end, int val)
  * @array:  (int)       Array of elements
  * @size:   (size_t)    Lenght of the array
  * @value:  (int)       value to be located in the array
-  * Return:	@pos:    (int)       index position if found or -1 otherwise
+ * Return:	@pos:    (int)       index position if found or -1 otherwise
  */
 
 int advanced_binary(int *array, size_t size, int value)
