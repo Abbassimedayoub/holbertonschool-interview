@@ -37,7 +37,34 @@ Both languages are essential for any aspiring software engineer, providing a com
 
 ## Repository Structure
 
-The repository is structured as follows:
+The repository is structured as follows: - advanced_binary_search
+- count_it
+- double_circular_linked_list
+- find_the_loop
+- heap_extract
+- heap_insert
+- heap_sort
+- infinite_multiplication
+- insert_in_sorted_linked_list
+- linear_skip
+- linked_list_cycle
+- linked_list_palindrome
+- lockboxes
+- log_parsing
+- making_change
+- menger
+- merge_sort
+- minimum_operations
+- nqueens
+- palindrome_integer
+- radix_sort
+- rain
+- rotate_2d_matrix
+- sandpiles
+- slide_line
+- sorted_array_to_avl
+- starwars_api
+- utf8_validation
 
 
 ## Contributing
